@@ -1,22 +1,47 @@
-public class MyHashMap<K, V> extends Result <K, V> implements InMyMap<K,V>   {
-    private int size;
+public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends Result <K, V>
+    private int size=0; // на всякий случай сразу проинициализировал 0
     private int capacity = 16;
 
-    private Result<K, V>[] table = new Result[capacity];
+    private Result<K, V>[] table;  // = new Result[capacity]; 
 
-    
+    public class Result <K, V> {
+        private K key;
+        private V value;
+        private Result<K, V> next;
+
+        public Result(K key, V value, Result<K, V> next){
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+
+        public K getKey() {
+            return key;
+        }
+        public void setKey(K key) {
+            this.key = key;
+        }
+        public V getValue() {
+            return value;
+        }
+        public void setValue(V value) {
+            this.value = value;
+        }
+        public Result getNext() {
+            return next;
+        }
+        public void setNext(Result<K, V> next) {
+            this.next = next;
+        }
+
+    }
+
 
     @SuppressWarnings("unchecked")
     public void MyHashMap(){
         table = new Result[capacity];
 
     }
-
-    public MyHashMap(K key, V value, Result<K, V> next) {
-        super(key, value, next);
-    }
-
-
     @Override
     public void put(K key, V value) {
         int index = index(key);
