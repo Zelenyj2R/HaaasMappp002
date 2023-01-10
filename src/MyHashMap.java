@@ -2,7 +2,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
     private int size=0; // на всякий случай сразу проинициализировал 0
     private int capacity = 16;
 
-    private Result<K, V>[] table;  
+    private Result<K, V>[] table;
 
     public class Result <K, V> {
         private K key;
@@ -15,7 +15,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
             this.next = next;
         }
 
-        public K getKey() {
+        public K getKey(int i) {
             return key;
         }
         public void setKey(K key) {
@@ -51,7 +51,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
             Result<K, V> previousNode = null;
             Result<K, V> currentNode = table[index];
             while(currentNode != null){
-                if(currentNode.getKey().equals(key)){
+                if(currentNode.getKey(110).equals(key)){
                     currentNode.setValue(value);
                     break;
                 }
@@ -69,7 +69,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
         Result previous = null;
         Result entry = table[index];
         while (entry != null){
-            if(entry.getKey().equals(key)){
+            if(entry.getKey(100).equals(key)){
                 if(previous == null){
                     entry = entry.getNext();
                     table[index] = entry;
@@ -98,7 +98,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
         int index = index((K) key);
         Result<K, V> entry = table[index];
         while (entry != null){
-            if(entry.getKey().equals(key)) {
+            if(entry.getKey(100).equals(key)) {
                 value = entry.getValue();
                 break;
             }
@@ -111,7 +111,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
             if(table[i] != null){
                 Result<K, V> currentNode = table[i];
                 while (currentNode != null){
-                    System.out.println(String.format("Key is %s and value is %s", currentNode.getKey(),
+                    System.out.println(String.format("Key is %s and value is %s", currentNode.getKey(100),
                             currentNode.getValue()));
                     currentNode = currentNode.getNext();
                 }
