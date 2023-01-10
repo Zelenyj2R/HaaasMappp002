@@ -37,10 +37,9 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
     }
 
 
-    @SuppressWarnings("unchecked")
-    public void MyHashMap(){
+    //@SuppressWarnings("unchecked")
+    public MyHashMap(){
         table = new Result[capacity];
-
     }
     @Override
     public void put(K key, V value) {
@@ -112,7 +111,8 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
             if(table[i] != null){
                 Result<K, V> currentNode = table[i];
                 while (currentNode != null){
-                    System.out.println(String.format("Key is %s and value is %s", currentNode.getKey(), currentNode.getValue()));
+                    System.out.println(String.format("Key is %s and value is %s", currentNode.getKey(),
+                            currentNode.getValue()));
                     currentNode = currentNode.getNext();
                 }
             }
