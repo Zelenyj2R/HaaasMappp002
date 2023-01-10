@@ -4,6 +4,14 @@ public class MyHashMap<K, V> extends Result <K, V> implements InMyMap<K,V>   {
 
     private Result<K, V>[] table = new Result[capacity];
 
+    
+
+    @SuppressWarnings("unchecked")
+    public void MyHashMap(){
+        table = new Result[capacity];
+
+    }
+
     public MyHashMap(K key, V value, Result<K, V> next) {
         super(key, value, next);
     }
