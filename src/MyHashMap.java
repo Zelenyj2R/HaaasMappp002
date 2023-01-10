@@ -2,7 +2,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
     private int size=0; // на всякий случай сразу проинициализировал 0
     private int capacity = 16;
 
-    private Result<K, V>[] table;  // = new Result[capacity]; 
+    private Result<K, V>[] table;  
 
     public class Result <K, V> {
         private K key;
