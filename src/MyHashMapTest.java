@@ -19,5 +19,5 @@ public class MyHashMapTest {
         map.put(11, "CS");
         map.display();
     }
-    }
+}
 
