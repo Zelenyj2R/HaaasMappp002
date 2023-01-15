@@ -1,8 +1,13 @@
-public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends Result <K, V>
-    private int size=0; // на всякий случай сразу проинициализировал 0
+import java.util.Arrays;
+
+public class MyHashMap<K, V> implements InMyMap<K,V>   {
+    private int size=0;
     private int capacity = 16;
 
     private Result<K, V>[] table;
+    private void grow() {
+        table = Arrays.copyOf(table, capacity *= 2);
+    }
 
     public class Result <K, V> {
         private K key;
@@ -15,7 +20,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
             this.next = next;
         }
 
-        public K getKey(int i) {
+        public K getKey() {
             return key;
         }
         public void setKey(K key) {
@@ -35,8 +40,6 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
         }
 
     }
-
-
     //@SuppressWarnings("unchecked")
     public MyHashMap(){
         table = new Result[capacity];
@@ -45,13 +48,16 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
     public void put(K key, V value) {
         int index = index(key);
         Result<K, V> newEntry = new Result<>(key, value, null);
+        if (size == capacity) {
+            grow();
+        }
         if(table[index] == null){
             table[index] = newEntry;
         }else {
             Result<K, V> previousNode = null;
             Result<K, V> currentNode = table[index];
             while(currentNode != null){
-                if(currentNode.getKey(110).equals(key)){
+                if(currentNode.getKey().equals(key)){
                     currentNode.setValue(value);
                     break;
                 }
@@ -69,7 +75,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
         Result previous = null;
         Result entry = table[index];
         while (entry != null){
-            if(entry.getKey(100).equals(key)){
+            if(entry.getKey().equals(key)){
                 if(previous == null){
                     entry = entry.getNext();
                     table[index] = entry;
@@ -98,7 +104,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
         int index = index((K) key);
         Result<K, V> entry = table[index];
         while (entry != null){
-            if(entry.getKey(100).equals(key)) {
+            if(entry.getKey().equals(key)) {
                 value = entry.getValue();
                 break;
             }
@@ -111,7 +117,7 @@ public class MyHashMap<K, V> implements InMyMap<K,V>   { // убрал extends R
             if(table[i] != null){
                 Result<K, V> currentNode = table[i];
                 while (currentNode != null){
-                    System.out.println(String.format("Key is %s and value is %s", currentNode.getKey(100),
+                    System.out.println(String.format("Key is %s and value is %s", currentNode.getKey(),
                             currentNode.getValue()));
                     currentNode = currentNode.getNext();
                 }
